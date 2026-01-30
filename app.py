@@ -2,12 +2,16 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from datetime import datetime
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
 #MongoDB setup
-MONGO_URI = "mongodb+srv://kush123:kush123@cluster0.8bvqrjj.mongodb.net/?appName=Cluster0"
+MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI)
 db = client.github_events      
 events_collection = db.events 
